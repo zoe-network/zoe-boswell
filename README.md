@@ -35,7 +35,18 @@ Part of the [Zoe](https://github.com/zoe-network) project.
 
 Whisper model sizes: `base.en` (~150 MB, fast, decent) through `large-v3` (~3 GB, slow on CPU, excellent). Default for capture-only is `medium.en` — the sweet spot for accuracy vs. speed on CPU. Default for combined mode is `base.en` for responsiveness.
 
-A work-issued ThinkPad with 16 GB RAM runs capture + post-meeting report comfortably. Real-time advisory on CPU works but the tips lag. A discrete GPU changes that.
+**Reference platform** (where Boswell was built and tested):
+
+| | |
+|---|---|
+| OS | Red Hat Enterprise Linux 10.1 |
+| CPU | AMD Ryzen 9 3900X — 12 cores / 24 threads |
+| RAM | 32 GB |
+| GPU | NVIDIA GeForce RTX 3070 — 8 GB VRAM |
+| CUDA | 13.0 |
+| Python | 3.12 |
+
+All three modes run comfortably on this machine. Capture + live advisory with `medium.en` on GPU leaves room to spare.
 
 ## Quick start
 

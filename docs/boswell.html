@@ -102,23 +102,12 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  .portrait {
-    float: right;
-    margin: 0 0 1.5rem 2rem;
-    max-width: 240px;
+  .hero-image {
+    width: 100%;
+    display: block;
+    margin: 2rem 0;
     border-radius: 6px;
     border: 1px solid var(--border);
-  }
-
-  .portrait-caption {
-    float: right;
-    clear: right;
-    margin: -1.2rem 0 1.5rem 2rem;
-    max-width: 240px;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-align: center;
-    line-height: 1.4;
   }
 
   blockquote {
@@ -203,8 +192,7 @@
     .hero { padding: 3rem 1.5rem 2rem; }
     .hero h1 { font-size: 2rem; }
     article { padding: 2rem 1.5rem 4rem; }
-    .portrait { float: none; margin: 0 auto 1.5rem; display: block; max-width: 200px; }
-    .portrait-caption { float: none; margin: -1rem auto 1.5rem; max-width: 200px; }
+    .hero-image { margin: 1.5rem 0; }
   }
 </style>
 </head>
@@ -218,11 +206,11 @@
 
 <article>
 
-<img src="boswell-quill.jpg" alt="A quill pen resting on a modern keyboard, terminal with meeting notes glowing behind it" class="portrait">
-
 <p>In 1763, a young Scottish lawyer walked into a London bookshop and met the most celebrated mind in England. For the next twenty-one years, James Boswell did something no one else bothered to do &mdash; he showed up to Samuel Johnson's meetings, paid close attention, and wrote down what actually happened. Not summaries. Not impressions. The real thing &mdash; who said what, the exact words, the moments everyone else forgot by dinner.</p>
 
 <p>Johnson was already famous. But without Boswell, we'd have lost what he actually said. He produced what is still considered the greatest biography in the English language. The person who writes it down is the one who makes it matter.</p>
+
+<img src="boswell-quill.jpg" alt="A quill pen resting on a modern keyboard, terminal with meeting notes glowing behind it" class="hero-image">
 
 <p>Boswell's advantage was simple: he was in the room, he was paying attention, and he controlled the record. Two hundred and sixty years later, most of us have lost all three.</p>
 

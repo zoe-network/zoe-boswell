@@ -1,6 +1,6 @@
 # Boswell
 
-**Sovereign meeting transcription that runs on your hardware.**
+**Same meetings. Better outcomes.**
 
 Boswell captures any audio stream on your Linux desktop — Google Meet, Zoom, Teams, a phone call on speaker, a podcast, anything PipeWire can route — and transcribes it locally using [faster-whisper](https://github.com/SYSTRAN/faster-whisper). No cloud. No subscription. No one else's server touching your audio.
 

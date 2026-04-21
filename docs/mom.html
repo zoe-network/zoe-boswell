@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mixture of Minds — How Zoe Cross-References What AI Tells You</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --bg-surface: #181a22;
+    --bg-elevated: #21242e;
+    --text: #e2e4ea;
+    --text-muted: #8b8fa3;
+    --accent: #6ea1ff;
+    --accent-dim: #3d6bbd;
+    --border: #2a2d3a;
+    --warn: #d4915e;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 17px;
+    padding: 0;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f1117 0%, #161a28 50%, #1a1524 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #e2e4ea 0%, #6ea1ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .hero .project-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid var(--accent-dim);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .hero .project-link:hover { background: rgba(110, 161, 255, 0.1); }
+
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 3rem 0 1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  h2:first-of-type { margin-top: 0; }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+    color: var(--text);
+  }
+
+  p { margin: 0 0 1rem; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  blockquote {
+    border-left: 3px solid var(--accent-dim);
+    padding: 0.8rem 1.2rem;
+    margin: 1.5rem 0;
+    background: var(--bg-surface);
+    border-radius: 0 6px 6px 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  blockquote strong { color: var(--text); font-style: normal; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--bg-elevated);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+
+  pre {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .diagram {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .diagram .highlight { color: var(--accent); font-weight: 500; }
+  .diagram .warn { color: var(--warn); font-weight: 500; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  tbody td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-surface); }
+
+  .callout {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .callout-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  .separator {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer a { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .hero h1 { font-size: 2rem; }
+    article { padding: 2rem 1.5rem 4rem; }
+    pre, .diagram { font-size: 0.75rem; padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Mixture of Minds</h1>
+  <p class="subtitle">How Zoe cross-references what AI tells you &mdash; and why one model's confidence is not the same as correctness.</p>
+  <a href="https://github.com/zoe-network" class="project-link">Part of the Zoe Project &rarr;</a>
+</div>
+
+<article>
+
+<h2>The Problem with Asking One Model</h2>
+
+<p>Every large language model hallucinates. Not sometimes &mdash; structurally. The architecture that makes LLMs useful (predicting the next plausible token) is the same architecture that makes them fabricate with confidence. A model that sounds certain and a model that is correct are not the same model, and there is no reliable way to tell them apart from a single response.</p>
+
+<p>The standard advice is to use a bigger model, or a better prompt, or retrieval-augmented generation. These help. None of them solve the problem. A bigger model hallucinates more eloquently. A better prompt reduces the frequency but not the confidence. RAG helps with facts the retriever can find, but the model can still confabulate the synthesis.</p>
+
+<p>Mixture of Minds starts from a different premise: <strong>if you can't trust one model's answer, ask several and see where they disagree.</strong></p>
+
+<h2>What MoM Is</h2>
+
+<p>MoM is a pattern, not a product. Given a task &mdash; summarize this transcript, review this code, assess this risk &mdash; MoM sends the same prompt to multiple models and compares their outputs. Where the models agree, you have corroboration. Where they disagree, you have signal.</p>
+
+<p>That signal is the point. A single model gives you an answer. MoM gives you a <em>map of certainty</em> &mdash; here's what three models all said independently, here's where one broke from the pack, here's what nobody was sure about.</p>
+
+<p>This is not ensemble averaging or majority voting. MoM does not blend outputs into a smoother answer. It preserves the disagreements and surfaces them. The user &mdash; or a synthesizer model &mdash; decides what to do with the conflict. Sometimes the dissenter is wrong. Sometimes the dissenter caught what the others missed.</p>
+
+<div class="callout">
+  <div class="callout-title">In Plain English</div>
+  <p>"I asked three different AIs your question. Two agreed on the key points. One pushed back on the timeline and flagged a risk the others didn't mention. Here's where they agree, here's where they don't, and here's why it matters."</p>
+</div>
+
+<h2>Why Disagreement Is the Feature</h2>
+
+<p>Different models are trained on different data, with different architectures, by different teams with different priorities. IBM Granite reads IBM's internal corpus. Meta's Llama reads a web-scale crawl. Alibaba's Qwen reads a multilingual corpus weighted toward Chinese-language technical writing. Anthropic's Claude reflects RLHF preferences shaped by a specific constitutional AI framework.</p>
+
+<p>These aren't just different random seeds on the same data. They're <em>different perspectives</em>, the way three analysts with different backgrounds reading the same earnings call will notice different things. The analyst who spent ten years in manufacturing catches the supply chain signal. The one from finance catches the debt restructuring. Neither is wrong &mdash; they're reading through different lenses.</p>
+
+<p>MoM exploits that structural diversity. A committee of models from different lineages (different training data, different architectures, different alignment approaches) catches more failure modes than any single model, however large.</p>
+
+<h2>The Three Tiers</h2>
+
+<p>MoM operates across three tiers depending on what resources are available. All three use the same pattern &mdash; parallel query, compare, surface disagreements &mdash; at different scales.</p>
+
+<h3>Tier 1: Local Models</h3>
+
+<p>The simplest form. Run two or three models through <a href="https://ollama.com">Ollama</a> on local hardware. Granite 8B, Qwen 7B, Llama 8B &mdash; each fits in 6-8 GB of RAM. Send the same prompt to all three, collect the outputs, compare.</p>
+
+<p>This runs on a single workstation or laptop. No network calls, no API keys, no cost per query. The tradeoff is that consumer hardware limits you to smaller models, and smaller models from the same era tend to share training data overlap &mdash; reducing the diversity that makes MoM work.</p>
+
+<h3>Tier 2: Cloud Endpoints</h3>
+
+<p>Add cloud-hosted models to the committee. Any OpenAI-compatible API endpoint &mdash; a managed model service, a cloud provider, a hosted inference platform &mdash; is a valid MoM participant alongside the local models. The local Granite gives you one perspective; Claude API gives you another; a hosted DeepSeek gives you a third.</p>
+
+<p>This is where MoM gets interesting for small-device deployments. A Zoe running on a phone or a Raspberry Pi can't run three 8B models locally. But it can run one small local model and call two cloud endpoints, getting genuine diversity of thought without needing a workstation.</p>
+
+<p>The sovereignty model is preserved because <strong>the user controls which endpoints participate</strong>. MoM does not phone home to a fixed service. You point it at the APIs you trust, with keys you own, under terms you accepted. A privacy-constrained deployment uses only local models. A deployment with cloud access adds those endpoints to the committee.</p>
+
+<h3>Tier 3: Recursive Delegation</h3>
+
+<p>This is the architectural insight that makes MoM more than a prompt fan-out trick.</p>
+
+<p>Some cloud models have their own multi-model capabilities. Claude can invoke its own internal analysis pipeline. Cloud inference services can route across model variants. A MoM committee doesn't just query a cloud model for an answer &mdash; <strong>it can ask the cloud model to use <em>its own</em> multi-model capability as a nested committee member.</strong></p>
+
+<div class="diagram"><span class="highlight">Local MoM Committee</span>
+  ├── Granite 8B (Ollama, local)          → response A
+  ├── Qwen 7B (Ollama, local)             → response B
+  └── Claude API <span class="warn">(cloud, recursive)</span>
+        └── Claude's internal analysis    → response C
+              ├── perspective C₁
+              ├── perspective C₂
+              └── perspective C₃
+
+<span class="highlight">Synthesizer</span> compares A, B, C
+  → agreement map
+  → disagreement map
+  → "C flagged something A and B missed — and C's own
+     internal committee was split on it"</div>
+
+<p>The result is a committee where some members are individuals and some members are themselves committees. The local MoM doesn't need to know or care about the internal structure of the cloud model's analysis &mdash; it receives a response like any other. But the <em>quality</em> of that response benefits from the cloud model's own diversity of thought.</p>
+
+<p>This creates a scaling pattern. A small edge device with one local model and one cloud endpoint effectively gets the diversity of many models. As the user adds more local models or more cloud endpoints, the committee grows. And because cloud capabilities evolve independently of the local deployment, the committee gets stronger over time without the user changing anything.</p>
+
+<h2>What MoM Is Not</h2>
+
+<p><strong>Not majority voting.</strong> Three-out-of-five doesn't win. If three models agree on a date and one disagrees, the one might be right. MoM surfaces the disagreement; it doesn't resolve it by counting heads.</p>
+
+<p><strong>Not ensemble averaging.</strong> Blending five model outputs into one smooth answer destroys the signal. MoM preserves individual responses and their differences.</p>
+
+<p><strong>Not a replacement for good models.</strong> If all your committee members are bad, MoM gives you a confident committee of bad answers. Garbage in, consensus garbage out. The committee needs at least one member with genuinely different training data to break groupthink.</p>
+
+<p><strong>Not immune to consensus hallucination.</strong> This is the open problem. When all models in the committee share the same wrong assumption (because they share training data, or the question targets a gap common to all of them), they agree confidently on the wrong answer. MoM catches <em>disagreements</em>. It has no mechanism for detecting <em>agreement on a falsehood</em>.</p>
+
+<h2>Early Evidence</h2>
+
+<p>We ran a first empirical test in March 2026: eight factual prompts and eight code prompts, each sent to five models from different lineages.</p>
+
+<table>
+  <thead>
+    <tr><th>Test type</th><th>Committee caught it</th><th>Consensus hallucination</th><th>Partial catch</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Factual (8 prompts)</td><td>4/8</td><td>2/8</td><td>2/8</td></tr>
+    <tr><td>Code (8 prompts)</td><td>—</td><td>4/8</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p>On factual questions, the committee caught disagreements half the time &mdash; cases where one model pushed back on something the others accepted. That's the value proposition: those four catches would have been invisible to a single-model query.</p>
+
+<p>On code review, the results were worse. The synthesizer can't execute code; it reads broken code with the same confidence it reads correct code. Four out of eight times, the entire committee rubber-stamped broken output. The implication: <strong>MoM for code tasks needs a non-AI committee member</strong> &mdash; a linter, a type checker, a test runner &mdash; something that can mechanically verify what the models cannot.</p>
+
+<p>The most revealing test used a niche cultural reference (a <em>Buckaroo Banzai</em> quote) to probe training-data diversity. Six models from four lineages all failed. Only one model &mdash; Grok, trained on Twitter/X data &mdash; recognized the reference. The lesson: <strong>model diversity must include data diversity, not just architectural diversity.</strong> Models trained on similar web crawls will share similar blind spots.</p>
+
+<blockquote>
+  <strong>One data point, not a proof.</strong> These results are suggestive. The sample is small, the prompts are hand-picked, and the test was run once. We publish them because the field needs empirical MoM data, not because we've proven anything. If you run your own tests and get different results, we want to know.
+</blockquote>
+
+<h2>The Consensus Hallucination Problem</h2>
+
+<p>Two of eight factual prompts produced consensus hallucination: every model in the committee agreed on the wrong answer. In both cases, the error involved recent product renamings and certification status &mdash; facts that changed after the models' training cutoffs.</p>
+
+<p>This is MoM's hard problem. Disagreement is signal. Agreement is either correctness or shared failure, and MoM cannot distinguish between them from the outputs alone.</p>
+
+<p>Candidate mitigations, none proven:</p>
+
+<ul style="margin: 0.5rem 0 1.5rem 1.5rem;">
+  <li><strong>Data-diverse committee members.</strong> Add models trained on different corpora (Grok for social media, domain-specific models for regulated industries, models with more recent cutoffs).</li>
+  <li><strong>Mechanical validators.</strong> For code, run linters and tests. For facts, check against structured databases. For dates, compare against calendars. The validator doesn't need to understand the content &mdash; it needs to catch specific classes of error the LLMs share.</li>
+  <li><strong>Calibrated uncertainty.</strong> Ask each model to rate its own confidence. Models are bad at this, but some are less bad than others. A committee member that says "I'm not sure" is more useful than one that says "definitely" and is wrong.</li>
+  <li><strong>Temporal grounding.</strong> If a claim depends on something that changed recently, flag it as requiring verification regardless of committee agreement.</li>
+</ul>
+
+<p>This is an open research problem. We don't have the answer. Anyone who tells you they've solved hallucination detection is selling something.</p>
+
+<h2>Where MoM Shows Up in Zoe</h2>
+
+<p><a href="https://github.com/zoe-network/zoe-boswell">Boswell</a> is the first Zoe project to implement MoM. After a meeting, Boswell sends the transcript to multiple models and cross-references their summaries. In its simplest form, this means running the report module twice with different <code>--model</code> flags and comparing the outputs. In its full form, the report module fans out to every configured endpoint &mdash; local and cloud &mdash; and presents a synthesis with disagreements highlighted.</p>
+
+<p>The pattern is intentionally not framework-locked. MoM is an approach you can implement in a shell script:</p>
+
+<pre>
+# ask three models the same question
+curl $OLLAMA/v1/chat/completions -d '{"model":"granite3.2:8b", ...}' > a.json
+curl $OLLAMA/v1/chat/completions -d '{"model":"qwen2.5:7b", ...}'   > b.json
+curl $CLOUD_API/v1/chat/completions -d '{"model":"claude-...", ...}' > c.json
+
+# compare
+diff a.json b.json
+diff b.json c.json
+# the interesting part is where they diverge
+</pre>
+
+<p>Any tool that talks to an OpenAI-compatible endpoint can participate. That's the point. MoM is a <em>pattern</em>, not a library. The models don't need to know they're on a committee. The orchestrator &mdash; Zoe, Boswell, or a bash script &mdash; sends the same prompt, collects the responses, and shows you the map.</p>
+
+<hr class="separator">
+
+<h2>Summary</h2>
+
+<p>One model gives you an answer. Multiple models give you a map of where answers agree and where they don't. That map is more useful than any single answer, because it tells you where to focus your attention and your skepticism.</p>
+
+<p>MoM works across three tiers: local models on your hardware, cloud endpoints you choose, and recursive delegation where cloud models bring their own multi-model capabilities to the committee. The pattern scales from a laptop to a distributed mesh without changing the core logic.</p>
+
+<p>The hard problem is consensus hallucination &mdash; when every model agrees on the wrong thing. We don't have a solution. We have early data, candidate mitigations, and an open invitation to anyone who wants to push on it.</p>
+
+<p>Zoe is always free. She is code, not a product. MoM is a pattern, not a framework. Use it however you want.</p>
+
+</article>
+
+<footer>
+  <a href="https://github.com/zoe-network">Zoe Project</a> &mdash; Apache 2.0
+  <br>
+  <span style="font-size: 0.8rem; margin-top: 0.5rem; display: inline-block;">
+    "Same meetings. Better output." &mdash; <a href="https://github.com/zoe-network/zoe-boswell">Boswell</a>
+  </span>
+</footer>
+
+</body>
+</html>

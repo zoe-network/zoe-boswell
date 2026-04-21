@@ -23,6 +23,20 @@ Part of the [Zoe](https://github.com/zoe-network) project.
 - **PulseAudio utilities** (`pactl`, `parec` — installed by default on most PipeWire systems)
 - **Ollama** (or any OpenAI-compatible LLM endpoint) for summarization
 
+### Hardware
+
+| | Capture only | Capture + Report | Capture + Live Advisory |
+|---|---|---|---|
+| **What runs** | Whisper (STT) | Whisper, then LLM | Whisper + LLM concurrently |
+| **RAM** | 2 GB (`base.en`) / 4 GB (`medium.en`) | 8 GB | 16 GB+ |
+| **CPU** | Any modern x86_64 | 8+ cores recommended | 8+ cores |
+| **GPU** | Optional (speeds up Whisper) | Optional | Recommended (NVIDIA + CUDA) |
+| **Disk** | ~1 GB for models | ~6 GB (Whisper + Granite 8B) | ~6 GB |
+
+Whisper model sizes: `base.en` (~150 MB, fast, decent) through `large-v3` (~3 GB, slow on CPU, excellent). Default for capture-only is `medium.en` — the sweet spot for accuracy vs. speed on CPU. Default for combined mode is `base.en` for responsiveness.
+
+A work-issued ThinkPad with 16 GB RAM runs capture + post-meeting report comfortably. Real-time advisory on CPU works but the tips lag. A discrete GPU changes that.
+
 ## Quick start
 
 ```bash

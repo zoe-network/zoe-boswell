@@ -1,0 +1,45 @@
+# Boswell configuration
+# Copy to config.yaml and edit for your setup.
+
+# Who you are (personalizes advisory prompts)
+user:
+  name: ""          # Your name
+  role: ""          # Your role, e.g. "Solutions Engineer"
+  org: ""           # Your organization
+
+# LLM endpoint (OpenAI-compatible API)
+model:
+  # Local Ollama — no API key needed, no data leaves your machine
+  endpoint: "http://localhost:11434/v1"
+  key_file: ""
+  name: "granite3.2:8b"
+  max_tokens: 300
+
+  # Remote endpoint example (uncomment and set key_file):
+  # endpoint: "https://your-llm-endpoint.example.com/v1"
+  # key_file: "~/.boswell-api-key"
+  # name: "granite-3-2-8b-instruct"
+
+# Transcript settings (for advisory and report)
+transcript:
+  path: "transcript.log"
+  tail_lines: 40              # lines of context per advisory cycle
+  interval_seconds: 30        # seconds between advisory checks
+  min_new_lines: 3            # minimum new lines to trigger advisory
+
+# Optional context sources
+context:
+  calendar: ""                # path to a markdown calendar file
+  memory_dir: ""              # directory of markdown files to search for attendee intel
+  extra: []                   # additional context files loaded at startup
+
+# Notification settings (advisory mode)
+notify:
+  mode: "both"                # desktop | terminal | both
+  urgency: "normal"           # low | normal | critical
+  timeout: 10                 # seconds for desktop notification
+
+# Field report (post-meeting)
+report:
+  output_dir: "./field-reports"
+  model: "granite3.2:8b"      # can differ from real-time advisory model

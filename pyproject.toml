@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zoe-boswell"
+version = "0.1.0"
+description = "Sovereign meeting transcription and intelligence. Your hardware, your model, your transcript."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Jim O'Donnell"},
+]
+dependencies = [
+    "faster-whisper>=1.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "requests>=2.28.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+gpu = ["ctranslate2[cuda]"]
+
+[project.urls]
+Homepage = "https://github.com/zoe-network/zoe-boswell"
+
+[tool.setuptools.packages.find]
+include = ["boswell*"]

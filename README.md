@@ -156,7 +156,7 @@ The `user` section personalizes the advisory and report prompts. The `model` sec
 
 Boswell sends the transcript to a local LLM and asks for structured output: summary, decisions, action items, technical topics, quotes. The default model is IBM Granite 3.2 8B via Ollama, chosen because it runs well on consumer hardware and produces disciplined, factual output.
 
-For higher-stakes meetings, you can run the transcript through multiple models and cross-reference their outputs — a diversity-of-thought approach where different models catch different things. The `report` module accepts any model your endpoint serves; run it twice with different `--model` flags and diff the results.
+For higher-stakes meetings, Boswell can cross-reference outputs across multiple models — a pattern called [Mixture of Minds (MoM)](https://zoe-network.github.io/zoe-boswell/mom.html). Send the same transcript to models from different lineages (local via Ollama, cloud via API, or both) and surface where they disagree. Disagreement is signal — it tells you where to focus your attention. The `report` module accepts any OpenAI-compatible endpoint; run it against as many models as you trust and compare the results.
 
 ## Project structure
 

@@ -233,7 +233,7 @@
 
 <p>Every large language model hallucinates. Not sometimes &mdash; structurally. The architecture that makes LLMs useful (predicting the next plausible token) is the same architecture that makes them fabricate with confidence. A model that sounds certain and a model that is correct are not the same model, and there is no reliable way to tell them apart from a single response.</p>
 
-<p>The standard advice is to use a bigger model, or a better prompt, or retrieval-augmented generation. These help. None of them solve the problem. A bigger model hallucinates more eloquently. A better prompt reduces the frequency but not the confidence. RAG helps with facts the retriever can find, but the model can still confabulate the synthesis.</p>
+<p>The standard advice is to use a bigger model, or a better prompt, or retrieval-augmented generation (RAG) &mdash; feeding the model relevant documents alongside the question. These help. None of them solve the problem. A bigger model hallucinates more eloquently. A better prompt reduces the frequency but not the confidence. RAG helps with facts the retriever can find, but the model can still confabulate the synthesis.</p>
 
 <p>Mixture of Minds starts from a different premise: <strong>if you can't trust one model's answer, ask several and see where they disagree.</strong></p>
 

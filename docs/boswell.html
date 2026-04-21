@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boswell — Same Meetings, Better Output</title>
+
+<!-- Open Graph for LinkedIn / social cards -->
+<meta property="og:title" content="Boswell — Same Meetings, Better Output">
+<meta property="og:description" content="Sovereign meeting transcription that runs on your hardware. Capture, summarize, advise — locally.">
+<meta property="og:image" content="https://zoe-network.github.io/zoe-boswell/boswell-portrait.jpg">
+<meta property="og:image:width" content="660">
+<meta property="og:image:height" content="800">
+<meta property="og:url" content="https://zoe-network.github.io/zoe-boswell/boswell.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boswell — Same Meetings, Better Output">
+<meta name="twitter:description" content="Sovereign meeting transcription that runs on your hardware.">
+<meta name="twitter:image" content="https://zoe-network.github.io/zoe-boswell/boswell-portrait.jpg">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --bg-surface: #181a22;
+    --bg-elevated: #21242e;
+    --text: #e2e4ea;
+    --text-muted: #8b8fa3;
+    --accent: #6ea1ff;
+    --accent-dim: #3d6bbd;
+    --border: #2a2d3a;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f1117 0%, #161a28 50%, #1a1524 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #e2e4ea 0%, #6ea1ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .hero .project-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid var(--accent-dim);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .hero .project-link:hover { background: rgba(110, 161, 255, 0.1); }
+
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  p { margin: 0 0 1.2rem; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .portrait {
+    float: right;
+    margin: 0 0 1.5rem 2rem;
+    max-width: 240px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .portrait-caption {
+    float: right;
+    clear: right;
+    margin: -1.2rem 0 1.5rem 2rem;
+    max-width: 240px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--accent-dim);
+    padding: 0.8rem 1.2rem;
+    margin: 1.5rem 0;
+    background: var(--bg-surface);
+    border-radius: 0 6px 6px 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--bg-elevated);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+
+  .callout {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .callout-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  tbody td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer a { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.5rem 2rem; }
+    .hero h1 { font-size: 2rem; }
+    article { padding: 2rem 1.5rem 4rem; }
+    .portrait { float: none; margin: 0 auto 1.5rem; display: block; max-width: 200px; }
+    .portrait-caption { float: none; margin: -1rem auto 1.5rem; max-width: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Boswell</h1>
+  <p class="subtitle">Same meetings. Better output.</p>
+  <a href="https://github.com/zoe-network/zoe-boswell" class="project-link">View on GitHub &rarr;</a>
+</div>
+
+<article>
+
+<img src="boswell-portrait.jpg" alt="Portrait of James Boswell by Sir Joshua Reynolds, 1785" class="portrait">
+<p class="portrait-caption">James Boswell, by Sir Joshua Reynolds, 1785.<br>National Portrait Gallery, London. Public domain.</p>
+
+<p>In 1763, a young Scottish lawyer walked into a London bookshop and met the most celebrated mind in England. For the next twenty-one years, James Boswell did something no one else bothered to do &mdash; he showed up to Samuel Johnson's meetings, paid close attention, and wrote down what actually happened. Not summaries. Not impressions. The real thing &mdash; who said what, the exact words, the moments everyone else forgot by dinner.</p>
+
+<p>Johnson was already famous. But without Boswell, we'd have lost what he actually said. The person who writes it down is the one who makes it matter.</p>
+
+<hr>
+
+<h2>The Problem</h2>
+
+<p>Let's be honest &mdash; the meeting audio already goes to someone else's server. That's how Meet, Teams, and Zoom work. You're not getting around that.</p>
+
+<p>But what happens to that audio after the call &mdash; who transcribes it, what model summarizes it, where the transcript lives, and what gets done with it &mdash; that part is up to you.</p>
+
+<p>Every platform has AI meeting notes now. They work. They're also inconsistent, opaque, and out of your control. You get a summary back. You don't get the raw transcript. You don't pick the model. You can't run it against your own context or on an air-gapped network.</p>
+
+<p>A note on privacy: the concerns are real, and in some jurisdictions the regulations are a moving target. You should absolutely disclose that you're using a tool to transcribe. But you should not assume that everyone else on the call &mdash; including the platform itself &mdash; is being equally transparent about what they're doing with the audio. Zero trust means no assumption of privacy in a remote meeting. Ever.</p>
+
+<h2>Same Idea, Different Century</h2>
+
+<p>So we built Boswell.</p>
+
+<p>Boswell captures any audio stream on a Linux desktop &mdash; Meet, Teams, Zoom, a phone call on speaker &mdash; and transcribes it locally using <a href="https://github.com/openai/whisper">OpenAI's Whisper</a>. The audio never leaves the machine. After the call, it sends the transcript to a local LLM for structured output: summary, decisions, action items, technical discussion, direct quotes. The default model is IBM Granite running through <a href="https://ollama.com">Ollama</a>, but any model works &mdash; local or cloud, your choice.</p>
+
+<p>The real trick isn't the model. It's context. Boswell knows who's on the call, what the account history is, and what you're trying to accomplish &mdash; before the first word is spoken. That's what turns a transcript into a field report. Johnson had plenty of people in the room. Only one of them was paying attention on purpose.</p>
+
+<h2>Head to Head</h2>
+
+<p>We tested it head-to-head against Google Gemini's built-in meeting notes on a recorded call, then had three open-source models judge both outputs blind across six criteria.</p>
+
+<table>
+  <thead>
+    <tr><th>Criterion</th><th>Winner</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Transcription accuracy</td><td>Gemini</td></tr>
+    <tr><td>Raw completeness</td><td>Gemini</td></tr>
+    <tr><td>Actionability</td><td>Boswell</td></tr>
+    <tr><td>Customer intel extraction</td><td>Boswell</td></tr>
+    <tr><td>Overall value as a deliverable</td><td>Boswell</td></tr>
+  </tbody>
+</table>
+
+<p>Gemini won on transcription accuracy and raw completeness &mdash; Google Meet has a platform advantage there, with access to individual audio streams and speaker identity. Boswell won on actionability, customer intel extraction, and overall value as a deliverable.</p>
+
+<p>One judge called Gemini's transcript "a dump requiring filtering" and Boswell's output "ready-to-use."</p>
+
+<h2>Hardware</h2>
+
+<p>Runs on any modern Linux box. We built and tested it on a Ryzen 9 with an RTX 3070 running Red Hat Enterprise Linux, but capture-only mode works fine on a laptop CPU.</p>
+
+<div class="callout">
+  <div class="callout-title">Reference Platform</div>
+  <p>AMD Ryzen 9 3900X &bull; 32 GB RAM &bull; NVIDIA RTX 3070 (8 GB) &bull; RHEL 10.1 &bull; CUDA 13.0</p>
+</div>
+
+<h2>Open Source</h2>
+
+<p>Apache 2.0. Part of the <a href="https://github.com/zoe-network">Zoe project</a>.</p>
+
+<p>If your meetings matter enough to record, they matter enough to keep on your own hardware.</p>
+
+<hr>
+
+<h2>What's Next</h2>
+
+<p>What happens when you don't trust any single model's summary &mdash; and you shouldn't? Boswell paired with a <a href="mom.html">Meeting of Minds</a> is the killer app. That's the next article.</p>
+
+</article>
+
+<footer>
+  <a href="https://github.com/zoe-network/zoe-boswell">zoe-network/zoe-boswell</a> &mdash; Apache 2.0
+  <br>
+  <span style="font-size: 0.8rem; margin-top: 0.5rem; display: inline-block;">
+    Portrait: Sir Joshua Reynolds, 1785. National Portrait Gallery, London. Public domain.
+  </span>
+</footer>
+
+</body>
+</html>

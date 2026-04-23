@@ -257,9 +257,9 @@ The full stack, when you're ready:
 
 You don't need all of this today. You need the top two rows. The rest comes when you're ready.
 
-**Zoe is always free. Zoe is code, not a product. Apache 2.0.**
+When you're ready for federation: https://zoe-network.github.io/zoe-boswell/federation.md
 
-Learn more: https://zoe-network.github.io/zoe-boswell/
+**Zoe is always free. Zoe is code, not a product. Apache 2.0.**
 
 ---
 

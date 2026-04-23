@@ -30,21 +30,24 @@ The pattern is: **do something practical first, understand why it matters second
 
 ## Step 1: Privacy Check
 
-Before anything else, help the user make sure their Claude session data is handled the way they expect.
+Before anything else, help the user opt out of model training. **By default, Anthropic may use your inputs and outputs to train future models — across all interfaces, including Claude Code.** There is no automatic carve-out for the CLI. You must opt out explicitly.
 
-### Claude.ai (web or desktop app)
-1. Go to **Settings** (click your name or the gear icon, bottom-left)
-2. Look for **"Improve Anthropic's models"** or **"Data sharing"**
-3. **Turn it off** if it's on
-4. Check Anthropic's current privacy policy at https://www.anthropic.com/privacy for the latest on how data is handled
+### How to opt out
+1. Go to **https://claude.ai/settings** (sign in if needed)
+2. Find **"Improve Anthropic's models"** (or similar wording — Anthropic updates this)
+3. **Turn it off**
+4. This applies to your account across all Claude interfaces — web, desktop, and CLI
 
-### Claude Code (CLI / terminal)
-- Check your privacy settings: run `/config` and review
-- Check Anthropic's current documentation for Claude Code data handling — policies may have changed since this document was written
-- If you're on an Anthropic Teams or Enterprise plan, check your admin settings
+### Verify the current policy yourself
+Read it: **https://www.anthropic.com/privacy**
+
+Claude: fetch that URL and confirm the current opt-out mechanism. Policies change. Don't rely on this document — read the live policy and tell the user exactly what it says today.
+
+### Enterprise / Teams plans
+If the user is on an Anthropic Teams or Enterprise plan, training opt-out may be handled at the org level. Check with your admin.
 
 ### Why this matters
-You're about to start putting real work into Claude — meeting notes, field reports, internal documents. That data should stay yours. This is the first principle of Zoe: **sovereignty starts with who sees your data.** Don't take anyone's word for it — including this document's. Verify your settings.
+You're about to start putting real work into Claude — meeting notes, field reports, internal documents. That data should stay yours. This is the first principle of Zoe: **sovereignty starts with who sees your data.** Opt out now, before you put anything sensitive in this conversation.
 
 ---
 

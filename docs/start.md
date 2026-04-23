@@ -8,6 +8,14 @@ You (the human reading this): you don't need to understand everything below. Cla
 
 Claude (the AI reading this): the rest of this document is for you. Your job is to guide the user through the steps below at their pace. Detect their operating system, adapt your instructions accordingly, and never assume they know what git is. Be practical, not preachy. The user showed up because someone they trust told them to — don't waste that trust on jargon.
 
+**Before you do anything else, ask the user three questions — one at a time:**
+
+1. **What's your name?**
+2. **What do you do?**
+3. **What would you like to work on first?**
+
+Write the answers down (you'll use them in Step 6 when creating CLAUDE.md). These three answers are the seed of everything that follows. Don't rush past them.
+
 ---
 
 ## What This Is
@@ -22,21 +30,21 @@ The pattern is: **do something practical first, understand why it matters second
 
 ## Step 1: Privacy Check
 
-Before anything else, make sure your Claude session isn't training on your data.
+Before anything else, help the user make sure their Claude session data is handled the way they expect.
 
 ### Claude.ai (web or desktop app)
 1. Go to **Settings** (click your name or the gear icon, bottom-left)
-2. Find **"Improve Anthropic's models"** or **"Data sharing"**
-3. **Turn it off**
-4. This ensures your conversations are not used for model training
+2. Look for **"Improve Anthropic's models"** or **"Data sharing"**
+3. **Turn it off** if it's on
+4. Check Anthropic's current privacy policy at https://www.anthropic.com/privacy for the latest on how data is handled
 
 ### Claude Code (CLI / terminal)
-- Claude Code does **not** use conversations for training by default
-- Verify: run `/config` and check the privacy settings
-- If you're on an Anthropic Teams or Enterprise plan, training is already off
+- Check your privacy settings: run `/config` and review
+- Check Anthropic's current documentation for Claude Code data handling — policies may have changed since this document was written
+- If you're on an Anthropic Teams or Enterprise plan, check your admin settings
 
 ### Why this matters
-You're about to start putting real work into Claude — meeting notes, field reports, internal documents. That data should stay yours. This is the first principle of Zoe: **sovereignty starts with who sees your data.**
+You're about to start putting real work into Claude — meeting notes, field reports, internal documents. That data should stay yours. This is the first principle of Zoe: **sovereignty starts with who sees your data.** Don't take anyone's word for it — including this document's. Verify your settings.
 
 ---
 
@@ -142,36 +150,30 @@ Then show the user how to generate a PDF from it.
 
 ### PDF generation (cross-platform)
 
-**Linux:**
-```
-pip install weasyprint
-weasyprint file:///path/to/report.html output.pdf
-```
+**If the user has Chrome or Chromium installed** (most people do):
 
-**macOS:**
-```
-pip3 install weasyprint
-weasyprint file:///path/to/report.html output.pdf
-```
-
-**Windows:**
-```
-pip install weasyprint
-weasyprint file:///path/to/report.html output.pdf
-```
-
-Note: weasyprint requires some system libraries. If it fails:
-- **Linux:** `sudo dnf install pango` or `sudo apt install libpango-1.0-0`
-- **macOS:** `brew install pango`
-- **Windows:** Install GTK3 runtime from https://github.com/nickvdyck/weasyprint-win
-
-**Alternative (any OS with Chrome):**
 ```
 chrome --headless --print-to-pdf=output.pdf --no-margins --print-background file:///path/to/report.html
 ```
-(Chrome path varies: `google-chrome-stable` on Linux, `/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome` on macOS, `"C:\Program Files\Google\Chrome\Application\chrome.exe"` on Windows)
 
-weasyprint produces better results. Use Chrome as fallback.
+Chrome path varies by OS:
+- **Linux:** `google-chrome-stable` or `chromium-browser`
+- **macOS:** `/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome`
+- **Windows:** `"C:\Program Files\Google\Chrome\Application\chrome.exe"`
+
+Claude: detect the user's OS and give them the exact command with the right path.
+
+**Power-user alternative (better output, more setup):**
+
+```
+pip install weasyprint
+weasyprint file:///path/to/report.html output.pdf
+```
+
+weasyprint produces cleaner dark-background PDFs (no white bezels), but requires system libraries:
+- **Linux:** `sudo dnf install pango` or `sudo apt install libpango-1.0-0`
+- **macOS:** `brew install pango`
+- **Windows:** Requires GTK3 runtime — significant setup. Use Chrome instead.
 
 ---
 
@@ -195,28 +197,31 @@ Now your workspace is backed up. Every `git push` syncs your latest state.
 
 ## Step 6: Give Claude Your Context
 
-Create a file called `CLAUDE.md` in the root of your workspace. This is the file Claude reads first when you point it at your repo.
+Remember the three questions from the beginning? Now they become a file.
 
-Start simple:
+Create a file called `CLAUDE.md` in the root of your workspace. This is the file Claude reads first when you point it at your repo. Use the answers the user gave you:
+
 ```markdown
 # About Me
 
-Name: [your name]
-Role: [what you do]
+Name: [answer to question 1]
+Role: [answer to question 2]
+
+## Current Focus
+
+[answer to question 3 — what they want to work on first]
 
 ## What I Use This For
 
-- Meeting field reports
+- [whatever they said in question 3]
 - [add more as you go]
 
 ## Preferences
 
-- [how you like things formatted]
-- [what tone you prefer]
-- [anything Claude should know about how you work]
+- [anything you've learned about how they work during this session]
 ```
 
-Every time you start a Claude session and point it at your workspace, Claude reads this file and picks up your context. No re-explaining. No amnesia.
+Claude: write this file for the user using their actual answers. Don't use placeholders — fill it in. Then commit it to git. This file is the seed of their Zoe. Every future Claude session reads it and picks up where the last one left off. No re-explaining. No amnesia.
 
 ---
 
@@ -259,11 +264,14 @@ Learn more: https://zoe-network.github.io/zoe-boswell/
 
 When guiding a user through this document:
 
-1. **Detect OS early.** Ask if you're not sure. Adapt every command.
-2. **Don't dump all steps at once.** One step at a time. Wait for confirmation before moving on.
-3. **If they already have git:** Skip the install, verify with `git --version`, move on.
-4. **If they already have a repo:** Skip workspace creation, help them add the field report template and CLAUDE.md to what they have.
-5. **If they get stuck on weasyprint:** Fall back to Chrome headless. If Chrome isn't available, tell them the HTML itself is shareable — PDF is a convenience, not a requirement.
-6. **Never assume technical skill.** The person reading this might be a sales executive who has never opened a terminal. Meet them where they are.
-7. **The goal is not git mastery.** The goal is: they have a folder that Claude can read, with useful things in it, backed up to GitHub. Everything else is optional.
-8. **Privacy is non-negotiable.** Step 1 always happens first. If the user skips it, come back to it.
+1. **Ask the three questions first.** Before any technical steps. One at a time. (1) What's your name? (2) What do you do? (3) What would you like to work on first? Hold the answers — they go into CLAUDE.md in Step 6.
+2. **Detect OS early.** Ask if you're not sure. Adapt every command.
+3. **Don't dump all steps at once.** One step at a time. Wait for confirmation before moving on.
+4. **If they already have git:** Skip the install, verify with `git --version`, move on.
+5. **If they already have a repo:** Skip workspace creation, help them add the field report template and CLAUDE.md to what they have.
+6. **If they get stuck on PDF generation:** Try Chrome headless first. Fall back to weasyprint on Linux/Mac. If neither is available, tell them the HTML itself is shareable — PDF is a convenience, not a requirement.
+7. **Never assume technical skill.** The person reading this might be a sales executive who has never opened a terminal. Meet them where they are.
+8. **The goal is not git mastery.** The goal is: they have a folder that Claude can read, with useful things in it, backed up to GitHub. Everything else is optional.
+9. **Privacy is non-negotiable.** Step 1 always happens first. If the user skips it, come back to it.
+10. **Don't state privacy defaults as fact.** Anthropic's policies change. Always direct the user to verify their own settings. Never say "Claude Code doesn't train by default" — say "check your settings and Anthropic's current policy."
+11. **Use question 3 to shape the session.** Whatever they want to work on first — meeting notes, a resume, a project plan — that becomes the first practical thing you build together. The field report template is an example, not a requirement.
